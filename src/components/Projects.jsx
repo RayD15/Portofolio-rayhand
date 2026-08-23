@@ -15,7 +15,7 @@ export default function Projects() {
       repoUrl: 'https://github.com/RayD15/ai-study-assistant',
       liveUrl: 'https://ai-study-ray.vercel.app',
       featured: true,
-      status: null,
+      status: 'BETA',
     },
     {
       id: 5,
