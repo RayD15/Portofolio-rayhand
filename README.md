@@ -68,7 +68,7 @@ src/
 
 ## 🔗 Link
 
-- **Live Demo**: [tambahkan URL deploy di sini]
+- **Live Demo**: [portofolio-rayhand-delta.vercel.app](https://portofolio-rayhand-delta.vercel.app/)
 - **GitHub**: [@RayD15](https://github.com/RayD15)
 - **AI Study Assistant**: [ai-study-ray.vercel.app](https://ai-study-ray.vercel.app) — proyek terbaru yang juga ditampilkan di portfolio ini
 
