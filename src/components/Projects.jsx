@@ -15,7 +15,7 @@ export default function Projects() {
       repoUrl: 'https://github.com/RayD15/ai-study-assistant',
       liveUrl: 'https://ai-study-ray.vercel.app',
       featured: true,
-      status: 'BETA',
+      status: 'ON PROGRESS',
     },
     {
       id: 5,
@@ -58,8 +58,10 @@ export default function Projects() {
         <div className="projects-grid">
           {filteredProjects.map(project => (
             <div key={project.id} className="project-card reveal">
-              {project.featured && <span className="project-badge">FEATURED</span>}
-              {project.status && <span className="project-badge project-badge--dev">{project.status}</span>}
+              <div className="project-badges">
+                {project.featured && <span className="project-badge">FEATURED</span>}
+                {project.status && <span className="project-badge project-badge--dev">{project.status}</span>}
+              </div>
               <div className="project-card-header">
                 <span className="project-category">[{project.category}]</span>
                 <h3 className="project-title">{project.title}</h3>
