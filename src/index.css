@@ -214,6 +214,54 @@
     box-shadow: 5px 5px 0px #000;
 }
 
+/* ---------- Project Modal ---------- */
+.project-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: var(--sp-4);
+}
+
+.project-modal {
+    background-color: var(--bg);
+    border: var(--border);
+    box-shadow: 8px 8px 0px #000;
+    padding: var(--sp-5);
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+}
+
+.project-modal-badge {
+    display: inline-block;
+    background-color: var(--accent-2);
+    color: var(--ink-1);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: var(--border);
+    margin-bottom: var(--sp-3);
+}
+
+.project-modal-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.25rem;
+    margin-bottom: var(--sp-2);
+}
+
+.project-modal-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    margin-bottom: var(--sp-4);
+}
+
 /* ---------- Reset & Base ---------- */
 * {
     margin: 0;

@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('All')
+  const [popupProject, setPopupProject] = useState(null)
 
   const categories = ['All', 'Web', 'Mobile', 'UI/UX']
 
@@ -26,6 +27,7 @@ export default function Projects() {
       tech: ['Laravel', 'Tailwind CSS', 'MySQL', 'PHP', 'Blade'],
       repoUrl: 'https://github.com/RayD15/Rayhand-laravel',
       hideRepo: true,
+      liveSoon: true,
       featured: false,
       status: 'Tahap Pengembangan',
     }
@@ -82,6 +84,11 @@ export default function Projects() {
                     <i className="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
                   </a>
                 )}
+                {project.liveSoon && (
+                  <button className="project-btn live-btn" onClick={() => setPopupProject(project)}>
+                    <i className="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+                  </button>
+                )}
                 {project.repoUrl && !project.hideRepo && (
                   <a href={project.repoUrl} className="project-btn repo-btn" target="_blank" rel="noopener noreferrer">
                     <i className="fa-brands fa-github"></i> Source Code
@@ -92,6 +99,21 @@ export default function Projects() {
           ))}
         </div>
       </div>
+
+      {popupProject && (
+        <div className="project-modal-overlay" onClick={() => setPopupProject(null)}>
+          <div className="project-modal" onClick={e => e.stopPropagation()}>
+            <span className="project-modal-badge">TAHAP PENGEMBANGAN</span>
+            <h3 className="project-modal-title">{popupProject.title}</h3>
+            <p className="project-modal-text">
+              Live demo belum tersedia karena project ini masih dalam tahap pengembangan. Nantikan update berikutnya!
+            </p>
+            <button className="project-btn live-btn" onClick={() => setPopupProject(null)}>
+              Tutup
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
