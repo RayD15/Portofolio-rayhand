@@ -13,9 +13,10 @@ export default function Projects() {
       description: 'Aplikasi belajar berbasis AI untuk pelajar SMP/SMA/SMK. Upload materi (PDF/TXT), lalu dapatkan ringkasan otomatis, quiz generator, flashcard, dan AI chat — lengkap dengan sistem XP, level, dan streak.',
       tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Gemini AI', 'LibSQL'],
       repoUrl: 'https://github.com/RayD15/ai-study-assistant',
+      hideRepo: true,
       liveUrl: 'https://ai-study-ray.vercel.app',
       featured: true,
-      status: 'ON PROGRESS',
+      status: 'BETA',
     },
     {
       id: 5,
@@ -24,6 +25,7 @@ export default function Projects() {
       description: 'Aplikasi e-commerce sederhana berbasis Laravel 12 dengan fitur produk, keranjang, checkout, pesanan, laporan, dan panel admin.',
       tech: ['Laravel', 'Tailwind CSS', 'MySQL', 'PHP', 'Blade'],
       repoUrl: 'https://github.com/RayD15/Rayhand-laravel',
+      hideRepo: true,
       featured: false,
       status: 'Tahap Pengembangan',
     }
@@ -80,9 +82,11 @@ export default function Projects() {
                     <i className="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
                   </a>
                 )}
-                <a href={project.repoUrl} className="project-btn repo-btn" target="_blank" rel="noopener noreferrer">
-                  <i className="fa-brands fa-github"></i> Source Code
-                </a>
+                {project.repoUrl && !project.hideRepo && (
+                  <a href={project.repoUrl} className="project-btn repo-btn" target="_blank" rel="noopener noreferrer">
+                    <i className="fa-brands fa-github"></i> Source Code
+                  </a>
+                )}
               </div>
             </div>
           ))}
