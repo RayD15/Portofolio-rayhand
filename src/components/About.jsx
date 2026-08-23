@@ -3,7 +3,7 @@ const details = [
   { label: 'Usia', value: '16 Tahun' },
   { label: 'Sekolah', value: 'SMK TAMAN SISWA 2 JAKARTA' },
   { label: 'Kelas', value: 'XI' },
-  { label: 'Lokasi', value: 'Indonesia' },
+  { label: 'Lokasi', value: 'Jakarta, Indonesia' },
   { label: 'Pengalaman', value: '1 Tahun' },
 ]
 

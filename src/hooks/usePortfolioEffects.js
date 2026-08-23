@@ -83,52 +83,6 @@ export default function usePortfolioEffects() {
     }
 
     // ===================================
-    // Custom Cursor Trail
-    // ===================================
-    let dot = null
-    let ring = null
-    let mouseX = 0
-    let mouseY = 0
-    let ringX = 0
-    let ringY = 0
-    let animId = null
-    let onMouseMove = null
-
-    if (window.innerWidth >= 768) {
-      dot = document.createElement('div')
-      dot.className = 'cursor-dot'
-      ring = document.createElement('div')
-      ring.className = 'cursor-ring'
-      document.body.appendChild(dot)
-      document.body.appendChild(ring)
-
-      onMouseMove = e => {
-        mouseX = e.clientX
-        mouseY = e.clientY
-        dot.style.left = mouseX + 'px'
-        dot.style.top = mouseY + 'px'
-      }
-      document.addEventListener('mousemove', onMouseMove)
-
-      const animateRing = () => {
-        ringX += (mouseX - ringX) * 0.15
-        ringY += (mouseY - ringY) * 0.15
-        ring.style.left = ringX + 'px'
-        ring.style.top = ringY + 'px'
-        animId = requestAnimationFrame(animateRing)
-      }
-      animateRing()
-
-      const hoverElements = document.querySelectorAll('a, button, .skill-card, .interest-card, .social-link')
-      const onEnter = () => ring.classList.add('hover')
-      const onLeave = () => ring.classList.remove('hover')
-      hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', onEnter)
-        el.addEventListener('mouseleave', onLeave)
-      })
-    }
-
-    // ===================================
     // Ink Splash on Click
     // ===================================
     const onInkClick = e => {
@@ -253,7 +207,7 @@ export default function usePortfolioEffects() {
       },
       { threshold: 0.1 },
     )
-    document.querySelectorAll('.skills-grid, .interest-grid, .about-details').forEach(el => {
+    document.querySelectorAll('.skills-grid, .interest-grid, .about-details, .certificates-grid').forEach(el => {
       el.classList.add('stagger-reveal')
       staggerObserver.observe(el)
     })
@@ -365,6 +319,28 @@ export default function usePortfolioEffects() {
     window.addEventListener('scroll', animateSkillProgress, { passive: true })
 
     // ===================================
+    // Journey Timeline Progress
+    // ===================================
+    const timelineEl = document.querySelector('.timeline')
+    const timelineProgress = document.querySelector('.timeline-progress')
+    const timelineMarkers = document.querySelectorAll('.timeline-marker')
+
+    const updateTimelineProgress = () => {
+      if (!timelineEl || !timelineProgress) return
+      const rect = timelineEl.getBoundingClientRect()
+      const triggerPoint = window.innerHeight * 0.75
+      const passed = Math.min(Math.max(triggerPoint - rect.top, 0), rect.height)
+      timelineProgress.style.height = (passed / rect.height) * 100 + '%'
+      timelineMarkers.forEach(marker => {
+        const markerRect = marker.getBoundingClientRect()
+        marker.classList.toggle('active', markerRect.top + markerRect.height / 2 <= triggerPoint)
+      })
+    }
+    updateTimelineProgress()
+    window.addEventListener('scroll', updateTimelineProgress, { passive: true })
+    window.addEventListener('resize', updateTimelineProgress)
+
+    // ===================================
     // Intersection Observer for Fade-in
     // ===================================
     const fadeObserver = new IntersectionObserver(
@@ -381,96 +357,6 @@ export default function usePortfolioEffects() {
       el.classList.add('fade-in')
       fadeObserver.observe(el)
     })
-
-    // ===================================
-    // Contact Form Handling
-    // ===================================
-    const contactForm = document.getElementById('contactForm')
-    const showNotification = (message, type = 'info') => {
-      const existingNotification = document.querySelector('.notification')
-      if (existingNotification) {
-        existingNotification.remove()
-      }
-      const notification = document.createElement('div')
-      notification.className = `notification notification-${type}`
-      notification.innerHTML = `
-        <span>${message}</span>
-        <button class="notification-close">&times;</button>
-      `
-      notification.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%) translateY(100px);
-        padding: 1rem 1.5rem;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        z-index: 99999;
-        animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        font-family: 'Crimson Text', serif;
-        font-size: 1rem;
-        ${type === 'success' ? 'background: #7a9e7e; color: white;' : ''}
-        ${type === 'error' ? 'background: #c4887a; color: white;' : ''}
-        ${type === 'info' ? 'background: #8a7bb0; color: white;' : ''}
-      `
-      document.body.appendChild(notification)
-      const closeBtn = notification.querySelector('.notification-close')
-      const dismiss = () => {
-        notification.style.animation = 'slideDown 0.3s ease forwards'
-        setTimeout(() => notification.remove(), 300)
-      }
-      closeBtn.addEventListener('click', dismiss)
-      setTimeout(() => {
-        if (notification.parentElement) {
-          dismiss()
-        }
-      }, 5000)
-    }
-
-    const onSubmit = async e => {
-      e.preventDefault()
-      const formData = new FormData(contactForm)
-      const name = formData.get('name')
-      const email = formData.get('email')
-      const subject = formData.get('subject')
-      const message = formData.get('message')
-
-      if (!name || !email || !subject || !message) {
-        showNotification('Mohon isi semua field', 'error')
-        return
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showNotification('Email tidak valid', 'error')
-        return
-      }
-
-      const submitBtn = contactForm.querySelector('.btn-submit')
-      const originalText = submitBtn.innerHTML
-      submitBtn.innerHTML = '<span>Mengirim...</span><i class="fas fa-spinner fa-spin"></i>'
-      submitBtn.disabled = true
-
-      try {
-        const res = await fetch('https://formspree.io/f/mvkpkoon', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, subject, message }),
-        })
-        if (res.ok) {
-          showNotification('Pesan berhasil dikirim!', 'success')
-          contactForm.reset()
-        } else {
-          showNotification('Gagal mengirim. Coba lagi.', 'error')
-        }
-      } catch {
-        showNotification('Gagal mengirim. Periksa koneksi.', 'error')
-      } finally {
-        submitBtn.innerHTML = originalText
-        submitBtn.disabled = false
-      }
-    }
-    contactForm?.addEventListener('submit', onSubmit)
 
     // ===================================
     // Smooth Scroll for Anchor Links
@@ -512,11 +398,10 @@ export default function usePortfolioEffects() {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('scroll', updateActiveNav)
       window.removeEventListener('scroll', animateSkillProgress)
-      if (onMouseMove) document.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('scroll', updateTimelineProgress)
+      window.removeEventListener('resize', updateTimelineProgress)
       document.removeEventListener('click', onInkClick)
-      contactForm?.removeEventListener('submit', onSubmit)
       if (typeTimer) clearTimeout(typeTimer)
-      if (animId) cancelAnimationFrame(animId)
       counterObserver.disconnect()
       revealObserver.disconnect()
       staggerObserver.disconnect()

@@ -7,6 +7,8 @@ export default function Navbar() {
     { href: '#home', label: 'Beranda' },
     { href: '#about', label: 'Tentang' },
     { href: '#skills', label: 'Keahlian' },
+    { href: '#projects', label: 'Proyek' },
+    { href: '#certificates', label: 'Sertifikat' },
     { href: '#interest', label: 'Minat' },
     { href: '#contact', label: 'Kontak' },
   ]
