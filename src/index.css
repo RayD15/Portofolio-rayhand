@@ -2,11 +2,11 @@
    BRUTALIST PORTFOLIO - Raw, bold, industrial
    ============================================================ */
 
-/* ---------- CSS Variables ---------- */
+/* ---------- CSS Variables — NEO BRUTALISM ---------- */
 :root {
     /* Warna Dasar */
-    --bg: #F0EDE8;
-    --bg-alt: #E5E0D8;
+    --bg: #F5F0EB;
+    --bg-alt: #ECE6DA;
     --surface: #FFFFFF;
 
     /* Teks */
@@ -15,20 +15,24 @@
     --ink-3: #444444;
     --ink-4: #888888;
 
-    /* Aksen */
-    --accent-1: #FF0000;
+    /* Aksen — neo-brutal pop */
+    --accent-1: #FF3B30;
     --accent-2: #FFD600;
-    --accent-3: #00FF00;
-    --accent-4: #FF6600;
-    --accent-5: #0066FF;
+    --accent-3: #00E676;
+    --accent-4: #FF6B00;
+    --accent-5: #2979FF;
+    --accent-pink: #FF2D95;
+    --accent-cyan: #00E5FF;
 
-    /* Border */
+    /* Border — tetap tebal brutal */
     --border: 3px solid #000000;
-    --border-thick: 5px solid #000000;
+    --border-thick: 4px solid #000000;
 
-    /* Bayangan */
+    /* Bayangan — hard offset, tanpa blur */
     --shadow-brutal: 6px 6px 0px #000000;
     --shadow-brutal-lg: 10px 10px 0px #000000;
+    --shadow-brutal-xl: 14px 14px 0px #000000;
+    --shadow-brutal-sm: 4px 4px 0px #000000;
 
     /* Radius - semua sharp */
     --r-sm: 0px;
@@ -72,23 +76,29 @@
 
 .filter-btn {
     font-family: 'Space Mono', monospace;
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 0.5rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 0.6rem 1.3rem;
     background-color: var(--surface);
-    color: var(--ink-1);
+    color: #000;
     border: var(--border);
-    box-shadow: var(--shadow-brutal);
+    box-shadow: var(--shadow-brutal-sm);
     cursor: pointer;
     text-transform: uppercase;
+    letter-spacing: 0.06em;
     transition: all var(--t-fast);
 }
 
 .filter-btn:hover,
 .filter-btn.active {
     background-color: var(--accent-2);
-    transform: translate(-2px, -2px);
-    box-shadow: 8px 8px 0px #000;
+    transform: translate(-3px, -3px);
+    box-shadow: 7px 7px 0px #000;
+}
+
+.filter-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0px #000;
 }
 
 .projects-grid {
@@ -102,41 +112,67 @@
     background-color: var(--surface);
     border: var(--border-thick);
     padding: var(--sp-3);
+    padding-top: calc(var(--sp-3) + 6px);
     box-shadow: var(--shadow-brutal-lg);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: transform var(--t-normal), box-shadow var(--t-normal);
+    overflow: visible;
+}
+
+/* neo brutal: thick accent top bar */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--accent-1);
+    border-bottom: var(--border);
 }
 
 .project-card:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 14px 14px 0px #000;
+    transform: translate(-6px, -6px) rotate(-0.4deg);
+    box-shadow: var(--shadow-brutal-xl);
 }
 
 .project-badges {
     position: absolute;
-    top: -14px;
-    right: 20px;
+    top: -16px;
+    right: 16px;
     display: flex;
     gap: 6px;
+    z-index: 2;
 }
 
 .project-badge {
     background-color: var(--accent-1);
     color: #fff;
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 2px 10px;
-    border: var(--border);
-    letter-spacing: 0.05em;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border: 2px solid #000;
+    box-shadow: 3px 3px 0px #000;
+    letter-spacing: 0.06em;
+    transform: rotate(-1deg);
 }
 
 .project-badge--dev {
     background-color: var(--accent-2);
-    color: var(--ink-1);
+    color: #000;
     text-transform: uppercase;
+    transform: rotate(1deg);
+}
+
+/* alternate card accent color */
+.project-card:nth-child(even)::before {
+    background: var(--accent-5);
+}
+.project-card:nth-child(3n)::before {
+    background: var(--accent-2);
 }
 
 .project-card-header {
@@ -173,12 +209,15 @@
 
 .tech-tag {
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.72rem;
+    font-weight: 800;
     background-color: var(--bg-alt);
-    color: var(--ink-1);
-    padding: 0.2rem 0.6rem;
-    border: 1px solid #000;
+    color: #000;
+    padding: 0.25rem 0.6rem;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0px #000;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 .project-links {
@@ -283,18 +322,20 @@ body {
     font-size: 1rem;
 }
 
-/* Grid overlay brutalism */
+/* Grid + halftone overlay — neo brutal */
 body::before {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 9998;
     pointer-events: none;
-    opacity: 0.03;
+    opacity: 0.035;
     background-image:
         linear-gradient(0deg, transparent 49.5%, #000 49.5%, #000 50.5%, transparent 50.5%),
-        linear-gradient(90deg, transparent 49.5%, #000 49.5%, #000 50.5%, transparent 50.5%);
-    background-size: 60px 60px;
+        linear-gradient(90deg, transparent 49.5%, #000 49.5%, #000 50.5%, transparent 50.5%),
+        radial-gradient(circle, #000 1.2px, transparent 1.2px);
+    background-size: 48px 48px, 48px 48px, 22px 22px;
+    background-position: 0 0, 0 0, 11px 11px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -329,25 +370,27 @@ ul {
 }
 
 .section-title {
-    font-size: clamp(2rem, 5vw, 2.9rem);
+    font-size: clamp(2rem, 5vw, 3rem);
     text-align: center;
     margin-bottom: var(--sp-2);
     position: relative;
     display: inline-block;
     width: 100%;
-    text-decoration: underline;
-    text-decoration-thickness: 4px;
-    text-underline-offset: 8px;
+    letter-spacing: -0.03em;
+    /* neo brutal: hard text-shadow offset */
+    text-shadow: 3px 3px 0px var(--accent-2);
 }
 
-/* Garis bawah brutalism */
+/* Garis bawah brutalism — neo thick + offset shadow */
 .section-title::after {
     content: '';
     display: block;
-    width: 120px;
-    height: 6px;
+    width: 140px;
+    height: 8px;
     margin: var(--sp-3) auto 0;
     background: var(--accent-1);
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0px #000;
     transform-origin: left;
     animation: inkLine 0.6s ease forwards;
 }
@@ -411,9 +454,14 @@ ul {
 
 .btn-primary:hover {
     background: var(--accent-1);
-    color: #000000;
-    transform: translate(-3px, -3px);
-    box-shadow: 9px 9px 0px #000000;
+    color: #FFFFFF;
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0px #000000;
+}
+
+.btn-primary:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000;
 }
 
 .btn-secondary {
@@ -437,7 +485,7 @@ ul {
     right: 0;
     z-index: 1000;
     background: #FFFFFF;
-    border-bottom: var(--border);
+    border-bottom: var(--border-thick);
     transition: var(--t-normal);
 }
 
@@ -581,26 +629,29 @@ ul {
 .hero-greeting {
     display: inline-block;
     font-family: 'Space Mono', monospace;
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     font-weight: 700;
-    color: var(--accent-1);
-    margin-bottom: var(--sp-1);
+    color: #000;
+    margin-bottom: var(--sp-2);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     background: var(--accent-2);
-    padding: 4px 12px;
+    padding: 6px 14px;
     border: var(--border);
+    box-shadow: var(--shadow-brutal-sm);
+    transform: rotate(-1.2deg);
 }
 
 .hero-name {
-    font-size: clamp(2rem, 4.5vw, 3.2rem);
-    font-weight: 700;
-    line-height: 1.05;
-    margin-bottom: var(--sp-1);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    line-height: 0.95;
+    margin-bottom: var(--sp-2);
     color: var(--ink-1);
-    text-decoration: underline;
-    text-decoration-thickness: 6px;
-    text-underline-offset: 8px;
+    /* neo brutal: no underline, pakai hard shadow jadi outline */
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    text-shadow: 4px 4px 0px var(--accent-2);
 }
 
 .hero-title {
@@ -623,13 +674,16 @@ ul {
 }
 
 .highlight {
-    color: var(--accent-1);
+    color: #000;
     font-weight: 800;
     font-family: 'Space Mono', monospace;
     font-size: 1em;
-    padding: 2px 6px;
+    padding: 2px 8px;
     background: var(--accent-2);
-    border: 2px solid var(--ink-1);
+    border: 2px solid #000;
+    box-shadow: 3px 3px 0px #000;
+    transform: rotate(-0.5deg);
+    display: inline-block;
 }
 
 .hero-buttons {
@@ -815,6 +869,7 @@ ul {
     border-radius: var(--r-md);
     text-align: center;
     border: var(--border);
+    box-shadow: var(--shadow-brutal-sm);
     transition: all var(--t-fast);
     position: relative;
     overflow: hidden;
@@ -838,7 +893,7 @@ ul {
 }
 
 .stat-card:hover {
-    transform: translate(-4px, -4px);
+    transform: translate(-5px, -5px) rotate(-0.5deg);
     box-shadow: var(--shadow-brutal);
 }
 
@@ -876,9 +931,12 @@ ul {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(200, 185, 150, 0.25) 1px, transparent 1px);
-    background-size: 22px 22px;
-    opacity: 0.4;
+    background-image:
+        radial-gradient(rgba(0, 0, 0, 0.07) 1.5px, transparent 1.5px),
+        linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 20px 20px, 40px 40px, 40px 40px;
+    opacity: 0.9;
     pointer-events: none;
 }
 
@@ -914,6 +972,7 @@ ul {
     border-radius: var(--r-md);
     text-align: center;
     border: var(--border);
+    box-shadow: var(--shadow-brutal-sm);
     transition: all var(--t-fast);
     position: relative;
 }
@@ -936,7 +995,7 @@ ul {
 }
 
 .skill-card:hover {
-    transform: translate(-4px, -4px);
+    transform: translate(-5px, -5px) rotate(-0.6deg);
     background: var(--accent-2);
     box-shadow: var(--shadow-brutal);
 }
@@ -998,11 +1057,12 @@ ul {
     border-radius: var(--r-md);
     text-align: center;
     border: var(--border);
+    box-shadow: var(--shadow-brutal-sm);
     transition: all var(--t-fast);
     position: relative;
 }
 
-/* Accent bar brutalism */
+/* Accent bar brutalism — neo thicker */
 .interest-card::after {
     content: '';
     position: absolute;
@@ -1011,10 +1071,14 @@ ul {
     right: 0;
     height: 8px;
     background: var(--accent-1);
+    border-bottom: var(--border);
 }
 
+.interest-card:nth-child(even)::after { background: var(--accent-5); }
+.interest-card:nth-child(3n)::after { background: var(--accent-2); }
+
 .interest-card:hover {
-    transform: translate(-4px, -4px);
+    transform: translate(-5px, -5px) rotate(0.4deg);
     box-shadow: var(--shadow-brutal);
 }
 
@@ -1172,7 +1236,7 @@ ul {
 }
 
 .timeline-item:hover .timeline-content {
-    transform: translate(-3px, -3px);
+    transform: translate(-5px, -5px) rotate(-0.3deg);
     box-shadow: var(--shadow-brutal-lg);
 }
 
@@ -1295,27 +1359,41 @@ ul {
     display: flex;
     flex-direction: column;
     transition: transform var(--t-normal), box-shadow var(--t-normal);
+    overflow: visible;
+}
+
+.certificate-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--accent-2);
+    border-bottom: var(--border);
 }
 
 .certificate-card:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 14px 14px 0px #000;
+    transform: translate(-6px, -6px) rotate(0.3deg);
+    box-shadow: var(--shadow-brutal-xl);
 }
 
 .certificate-badge {
     position: absolute;
     top: -14px;
-    right: 20px;
+    right: 16px;
     background-color: var(--accent-2);
-    color: var(--ink-1);
+    color: #000;
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 2px 10px;
-    border: var(--border);
-    letter-spacing: 0.05em;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border: 2px solid #000;
+    box-shadow: 3px 3px 0px #000;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     z-index: 1;
+    transform: rotate(1deg);
 }
 
 .certificate-preview {
@@ -1413,17 +1491,19 @@ ul {
     width: 110%;
     margin-left: -5%;
     background: var(--ink-1);
-    border-top: var(--border);
-    border-bottom: var(--border);
-    transform: rotate(-2deg);
+    border-top: var(--border-thick);
+    border-bottom: var(--border-thick);
+    box-shadow: 0 6px 0px #000;
+    transform: rotate(-1.5deg);
     overflow: hidden;
 }
 
 .marquee-strip--accent {
     background: var(--accent-2);
-    color: var(--ink-1);
-    transform: rotate(2deg);
-    margin-top: -24px;
+    color: #000;
+    transform: rotate(1.5deg);
+    margin-top: -18px;
+    box-shadow: 0 6px 0px #000;
 }
 
 .marquee-strip .marquee-content {
