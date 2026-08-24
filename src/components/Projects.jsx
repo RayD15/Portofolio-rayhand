@@ -9,7 +9,7 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: 'AI Study Assistant',
+      title: 'Ray Study Assistant',
       category: 'Web',
       description: 'Aplikasi belajar berbasis AI untuk pelajar SMP/SMA/SMK. Upload materi (PDF/TXT), lalu dapatkan ringkasan otomatis, quiz generator, flashcard, dan AI chat — lengkap dengan sistem XP, level, dan streak.',
       tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Gemini AI', 'LibSQL'],
